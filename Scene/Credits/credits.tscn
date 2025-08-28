@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://dy4fg73omblcr"]
 
-[ext_resource type="Texture2D" uid="uid://0iobvmuxxfy8" path="res://background.jpeg" id="1_3hbp5"]
+[ext_resource type="Texture2D" uid="uid://0iobvmuxxfy8" path="res://assets/background.jpeg" id="1_3hbp5"]
 [ext_resource type="Script" uid="uid://lys7yfxsm4an" path="res://Scene/Credits/credits.gd" id="1_3rv14"]
-[ext_resource type="FontFile" uid="uid://7txsortuvbc4" path="res://zen_masters/ZEN.TTF" id="2_3rv14"]
+[ext_resource type="FontFile" uid="uid://7txsortuvbc4" path="res://assets/font/ZEN.TTF" id="2_3rv14"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_wofek"]
 texture = ExtResource("1_3hbp5")

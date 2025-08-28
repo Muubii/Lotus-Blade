@@ -1,83 +1,83 @@
-[gd_scene load_steps=9 format=3 uid="uid://dyqfd28oeb1p3"]
+[gd_scene load_steps=13 format=3 uid="uid://dyqfd28oeb1p3"]
 
-[ext_resource type="Texture2D" uid="uid://bktmrj84x1jfc" path="res://assets/sprites/knight.png" id="1_la1h0"]
+[ext_resource type="Texture2D" uid="uid://bft1vsep12jgs" path="res://assets/sprites/character/IDLE/idle_up.png" id="1_kelma"]
+[ext_resource type="Script" uid="uid://c6ulixvquj0ur" path="res://Scene/player.gd" id="1_y8w33"]
 
-[sub_resource type="GDScript" id="GDScript_kelma"]
-script/source = "extends CharacterBody2D
+[sub_resource type="AtlasTexture" id="AtlasTexture_y8w33"]
+atlas = ExtResource("1_kelma")
+region = Rect2(0, 0, 96, 80)
 
-@export var speed = 300.0
-@export var jump_velocity = -400.0
+[sub_resource type="AtlasTexture" id="AtlasTexture_xa75v"]
+atlas = ExtResource("1_kelma")
+region = Rect2(96, 0, 96, 80)
 
-func _physics_process(delta: float) -> void:
-	# Apply gravity if not on floor
-	if not is_on_floor():
-		velocity += get_gravity() * delta
+[sub_resource type="AtlasTexture" id="AtlasTexture_58ae2"]
+atlas = ExtResource("1_kelma")
+region = Rect2(192, 0, 96, 80)
 
-	# Jump with W or Space (ui_up or ui_accept)
-	if (Input.is_action_just_pressed(\"ui_up\") or Input.is_action_just_pressed(\"ui_accept\")) and is_on_floor():
-		velocity.y = jump_velocity
+[sub_resource type="AtlasTexture" id="AtlasTexture_ivevv"]
+atlas = ExtResource("1_kelma")
+region = Rect2(288, 0, 96, 80)
 
-	# Get input direction (A and D → left/right)
-	var input_direction := Input.get_axis(\"ui_left\", \"ui_right\")
-	if input_direction:
-		velocity.x = input_direction * speed
-	else:
-		# Smooth stop when no input
-		velocity.x = move_toward(velocity.x, 0, speed)
+[sub_resource type="AtlasTexture" id="AtlasTexture_r6jsd"]
+atlas = ExtResource("1_kelma")
+region = Rect2(384, 0, 96, 80)
 
-	# Move character
-	move_and_slide()
-"
+[sub_resource type="AtlasTexture" id="AtlasTexture_p6qlh"]
+atlas = ExtResource("1_kelma")
+region = Rect2(480, 0, 96, 80)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_yx0hs"]
-atlas = ExtResource("1_la1h0")
-region = Rect2(0, 0, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_2sw5t"]
+atlas = ExtResource("1_kelma")
+region = Rect2(576, 0, 96, 80)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_wv00g"]
-atlas = ExtResource("1_la1h0")
-region = Rect2(32, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_sid3l"]
-atlas = ExtResource("1_la1h0")
-region = Rect2(64, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_mbess"]
-atlas = ExtResource("1_la1h0")
-region = Rect2(96, 0, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_ij4jb"]
+atlas = ExtResource("1_kelma")
+region = Rect2(672, 0, 96, 80)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_pp4s8"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_yx0hs")
+"texture": SubResource("AtlasTexture_y8w33")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_wv00g")
+"texture": SubResource("AtlasTexture_xa75v")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_sid3l")
+"texture": SubResource("AtlasTexture_58ae2")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_mbess")
+"texture": SubResource("AtlasTexture_ivevv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r6jsd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p6qlh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2sw5t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ij4jb")
 }],
 "loop": true,
-"name": &"idle",
-"speed": 10.0
+"name": &"new_animation",
+"speed": 5.0
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hnm5t"]
 radius = 6.0
 
 [node name="Player" type="CharacterBody2D"]
-script = SubResource("GDScript_kelma")
+script = ExtResource("1_y8w33")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(0, -12)
+position = Vector2(-21, -5)
 sprite_frames = SubResource("SpriteFrames_pp4s8")
-animation = &"idle"
-autoplay = "idle"
-frame_progress = 0.72969
+animation = &"new_animation"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -6)
+position = Vector2(-21, -4)
 shape = SubResource("CircleShape2D_hnm5t")

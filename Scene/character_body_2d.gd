@@ -5,7 +5,7 @@ extends CharacterBody2D
 @export var attacking = false
 
 func _ready():
-	# Connect the animation_finished signal
+	# Connect animation_finished signal to detect when attack animation ends
 	animated_sprite.animation_finished.connect(_on_animation_finished)
 
 func _process(delta):
@@ -15,6 +15,7 @@ func _process(delta):
 func get_input():
 	var input_direction = Input.get_vector("left", "right", "up", "down")
 	velocity = input_direction * speed
+	
 	if !attacking:
 		if input_direction.y < 0:
 			animated_sprite.play("run_up")
@@ -27,17 +28,20 @@ func get_input():
 			animated_sprite.play("idle_down")
 
 func attack():
-	var overlapping_objects = $attackArea.get_overlapping_areas()
-	
-	for area in overlapping_objects:
-		var parent = area.get_parent()
-		parent.take_damage()
-	
+	print("Attack function called")
+	var overlapping_areas = $attackArea.get_overlapping_areas()
+	print("Overlapping areas count: ", overlapping_areas.size())
+	for area in overlapping_areas:
+		var enemy = area.get_parent()
+		if enemy.has_method("take_damage"):
+			print("Damaging enemy: ", enemy.name)
+			enemy.take_damage()
 	attacking = true
 	animated_sprite.play("atack1.down")
 
+
 func _on_animation_finished():
-	# Only reset if attack animation has ended
+	# Reset attacking state when attack animation finishes
 	if animated_sprite.animation == "atack1.down":
 		attacking = false
 

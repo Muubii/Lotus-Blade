@@ -866,12 +866,15 @@ position = Vector2(151, 4.00002)
 scale = Vector2(0.496292, 0.46414)
 script = ExtResource("14_a6mvv")
 
-[node name="Sprite2D" type="Sprite2D" parent="enemy"]
-position = Vector2(-4.02988, 4.30905)
+[node name="Area2D" type="Area2D" parent="enemy"]
+position = Vector2(-4.02988, 21.5452)
+
+[node name="Sprite2D" type="Sprite2D" parent="enemy/Area2D"]
+position = Vector2(0, -17.2361)
 scale = Vector2(0.193568, 0.213161)
 texture = ExtResource("15_s81y4")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="enemy"]
-position = Vector2(-2.01498, 2.15448)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="enemy/Area2D"]
+position = Vector2(2.01489, -19.3907)
 scale = Vector2(0.355221, 0.482915)
 shape = SubResource("RectangleShape2D_bfvnh")

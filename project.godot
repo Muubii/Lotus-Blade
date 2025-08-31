@@ -13,7 +13,11 @@ config_version=5
 config/name="Lotus-Blade"
 run/main_scene="uid://dhmn0dbohss1t"
 config/features=PackedStringArray("4.4", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="res://images/icon.svg"
+
+[autoload]
+
+BgMusic="*res://Scene/Levels/World-1/bgMusic.tscn"
 
 [editor_plugins]
 

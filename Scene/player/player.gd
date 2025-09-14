@@ -3,19 +3,21 @@ extends CharacterBody2D
 @export var speed = 400
 @onready var animated_sprite = $AnimatedSprite2D
 @export var attacking = false
+@export var attack_damage = 5
+@export var health = 100
+@export var health_max = 100
+@export var health_min = 0
 
 func _ready():
-	# Connect animation_finished signal to detect when attack animation ends
 	animated_sprite.animation_finished.connect(_on_animation_finished)
 
-func _process(delta):
+func _process(_delta):
 	if Input.is_action_just_pressed("attack"):
 		attack()
 
 func get_input():
 	var input_direction = Input.get_vector("left", "right", "up", "down")
 	velocity = input_direction * speed
-	
 	if !attacking:
 		if input_direction.y < 0:
 			animated_sprite.play("run_up")
@@ -35,13 +37,27 @@ func attack():
 		var enemy = area.get_parent()
 		if enemy.has_method("take_damage"):
 			print("Damaging enemy: ", enemy.name)
-			enemy.take_damage()
+			enemy.take_damage(attack_damage) # Pass the desired damage value here
 	attacking = true
 	animated_sprite.play("atack1.down")
 
+func take_damage(amount: int = 1):
+	health -= amount
+	if health < health_min:
+		health = health_min
+	if health <= health_min:
+		die()
+
+func heal(amount: int = 1):
+	health += amount
+	if health > health_max:
+		health = health_max
+
+func die():
+	# Change to main menu scene on player death
+	get_tree().change_scene_to_file("res://main-menu/main-menu.tscn")
 
 func _on_animation_finished():
-	# Reset attacking state when attack animation finishes
 	if animated_sprite.animation == "atack1.down":
 		attacking = false
 

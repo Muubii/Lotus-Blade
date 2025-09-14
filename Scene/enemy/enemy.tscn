@@ -1,8 +1,9 @@
-[gd_scene load_steps=89 format=3 uid="uid://bfhortvcs4mkg"]
+[gd_scene load_steps=91 format=3 uid="uid://bfhortvcs4mkg"]
 
 [ext_resource type="Script" uid="uid://sujc2gdovs52" path="res://Scene/enemy/enemy.gd" id="1_73x2u"]
 [ext_resource type="Texture2D" uid="uid://bkqv5mmp0ataj" path="res://images/icon.jpg" id="2_2iwxp"]
 [ext_resource type="Script" uid="uid://bjtmytfrmdtnk" path="res://Scene/player/player.gd" id="3_4v6dm"]
+[ext_resource type="PackedScene" uid="uid://cbowyy4rpjfet" path="res://health_bar.tscn" id="3_uxatu"]
 [ext_resource type="Texture2D" uid="uid://chsnq6lonlxlr" path="res://assets/MC/Sprites/ATTACK 1/attack1_down.png" id="4_2r3mv"]
 [ext_resource type="Texture2D" uid="uid://dlppcm1xj3bms" path="res://assets/MC/Sprites/IDLE/idle_down.png" id="5_jccr3"]
 [ext_resource type="Texture2D" uid="uid://dgkkasdcvme08" path="res://assets/MC/Sprites/IDLE/idle_left.png" id="6_jd3y4"]
@@ -15,6 +16,9 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dn8ps"]
 size = Vector2(279, 223)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yutqm"]
+size = Vector2(406.205, 126.929)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vx50t"]
 atlas = ExtResource("4_2r3mv")
@@ -587,8 +591,25 @@ scale = Vector2(0.544922, 0.441406)
 texture = ExtResource("2_2iwxp")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="enemy"]
-position = Vector2(-1.90735e-06, -2.15453)
+position = Vector2(2.01494, -4.30905)
 shape = SubResource("RectangleShape2D_dn8ps")
+
+[node name="attackArea" type="Area2D" parent="enemy"]
+unique_name_in_owner = true
+scale = Vector2(10.9931, 1.1561)
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="enemy/attackArea"]
+unique_name_in_owner = true
+position = Vector2(0.0962448, -7.34143)
+scale = Vector2(0.0626982, 1.46645)
+shape = SubResource("RectangleShape2D_yutqm")
+
+[node name="HealthBar" parent="enemy" instance=ExtResource("3_uxatu")]
+offset_left = -147.091
+offset_top = 122.808
+offset_right = 145.909
+offset_bottom = 184.808
 
 [node name="player" type="CharacterBody2D" parent="."]
 position = Vector2(677, 200)

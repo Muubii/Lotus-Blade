@@ -1,4 +1,4 @@
-[gd_scene load_steps=86 format=3 uid="uid://d3asq3k1sr1nk"]
+[gd_scene load_steps=87 format=3 uid="uid://d3asq3k1sr1nk"]
 
 [ext_resource type="Script" uid="uid://bjtmytfrmdtnk" path="res://Scene/player/player.gd" id="1_c68nv"]
 [ext_resource type="Texture2D" uid="uid://chsnq6lonlxlr" path="res://assets/MC/Sprites/ATTACK 1/attack1_down.png" id="2_c31lq"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://fbhra58qlhat" path="res://assets/MC/Sprites/RUN/run_left.png" id="8_c40dt"]
 [ext_resource type="Texture2D" uid="uid://cwk8cekdg8ntf" path="res://assets/MC/Sprites/RUN/run_right.png" id="9_lgjog"]
 [ext_resource type="Texture2D" uid="uid://dgmfu3lvou02f" path="res://assets/MC/Sprites/RUN/run_up.png" id="10_lhccw"]
+[ext_resource type="PackedScene" uid="uid://cbowyy4rpjfet" path="res://health_bar.tscn" id="11_yyifu"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vx50t"]
 atlas = ExtResource("2_c31lq")
@@ -596,3 +597,10 @@ monitorable = false
 position = Vector2(1.54642, 5.18987)
 scale = Vector2(0.0626982, 1.46645)
 shape = SubResource("RectangleShape2D_1vqkc")
+
+[node name="HealthBar" parent="player" instance=ExtResource("11_yyifu")]
+offset_left = -13.0
+offset_top = 19.0
+offset_right = 14.0
+offset_bottom = 25.0
+metadata/_edit_use_anchors_ = true

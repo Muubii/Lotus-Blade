@@ -12,7 +12,7 @@ func _ready():
 	animated_sprite.animation_finished.connect(_on_animation_finished)
 
 func _process(_delta):
-	if Input.is_action_just_pressed("attack"):
+	if Input.is_action_just_pressed("attack") and !attacking:
 		attack()
 
 func get_input():
@@ -35,23 +35,20 @@ func attack():
 	print("Overlapping areas count: ", overlapping_areas.size())
 	for area in overlapping_areas:
 		var enemy = area.get_parent()
-		if enemy.has_method("take_damage"):
+		if enemy and enemy.has_method("take_damage"):
 			print("Damaging enemy: ", enemy.name)
-			enemy.take_damage(attack_damage) # Pass the desired damage value here
+			enemy.take_damage(attack_damage)
 	attacking = true
 	animated_sprite.play("atack1.down")
 
 func take_damage(amount: int = 1):
 	health -= amount
-	if health < health_min:
-		health = health_min
+	health = clamp(health, health_min, health_max)
 	if health <= health_min:
 		die()
 
 func heal(amount: int = 1):
-	health += amount
-	if health > health_max:
-		health = health_max
+	health = clamp(health + amount, health_min, health_max)
 
 func die():
 	# Change to main menu scene on player death

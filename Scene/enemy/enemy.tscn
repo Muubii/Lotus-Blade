@@ -1,4 +1,4 @@
-[gd_scene load_steps=91 format=3 uid="uid://bfhortvcs4mkg"]
+[gd_scene load_steps=92 format=3 uid="uid://bfhortvcs4mkg"]
 
 [ext_resource type="Script" uid="uid://sujc2gdovs52" path="res://Scene/enemy/enemy.gd" id="1_73x2u"]
 [ext_resource type="Texture2D" uid="uid://bkqv5mmp0ataj" path="res://images/icon.jpg" id="2_2iwxp"]
@@ -13,12 +13,6 @@
 [ext_resource type="Texture2D" uid="uid://fbhra58qlhat" path="res://assets/MC/Sprites/RUN/run_left.png" id="10_0qy3v"]
 [ext_resource type="Texture2D" uid="uid://cwk8cekdg8ntf" path="res://assets/MC/Sprites/RUN/run_right.png" id="11_smfg5"]
 [ext_resource type="Texture2D" uid="uid://dgmfu3lvou02f" path="res://assets/MC/Sprites/RUN/run_up.png" id="12_bdb26"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_dn8ps"]
-size = Vector2(279, 223)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_yutqm"]
-size = Vector2(406.205, 126.929)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vx50t"]
 atlas = ExtResource("4_2r3mv")
@@ -578,38 +572,16 @@ radius = 3.00713
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nenbi"]
 size = Vector2(19.5086, 19.17)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uxatu"]
+size = Vector2(92.4033, 88.9037)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t4wjf"]
+size = Vector2(262.878, 211.472)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4wcrf"]
+size = Vector2(135.481, 62.9748)
+
 [node name="Node2D" type="Node2D"]
-
-[node name="enemy" type="CharacterBody2D" parent="."]
-position = Vector2(402, 214)
-scale = Vector2(0.496292, 0.46414)
-script = ExtResource("1_73x2u")
-
-[node name="Sprite2D" type="Sprite2D" parent="enemy"]
-position = Vector2(-1.52588e-05, -2.15451)
-scale = Vector2(0.544922, 0.441406)
-texture = ExtResource("2_2iwxp")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="enemy"]
-position = Vector2(2.01494, -4.30905)
-shape = SubResource("RectangleShape2D_dn8ps")
-
-[node name="attackArea" type="Area2D" parent="enemy"]
-unique_name_in_owner = true
-scale = Vector2(10.9931, 1.1561)
-monitorable = false
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="enemy/attackArea"]
-unique_name_in_owner = true
-position = Vector2(0.0962448, -7.34143)
-scale = Vector2(0.0626982, 1.46645)
-shape = SubResource("RectangleShape2D_yutqm")
-
-[node name="HealthBar" parent="enemy" instance=ExtResource("3_uxatu")]
-offset_left = -147.091
-offset_top = 122.808
-offset_right = 145.909
-offset_bottom = 184.808
 
 [node name="player" type="CharacterBody2D" parent="."]
 position = Vector2(677, 200)
@@ -636,3 +608,42 @@ monitorable = false
 position = Vector2(1.54642, 5.18987)
 scale = Vector2(0.0626982, 1.46645)
 shape = SubResource("RectangleShape2D_nenbi")
+
+[node name="enemy3" type="CharacterBody2D" parent="."]
+position = Vector2(57, -57)
+scale = Vector2(0.248113, 0.215426)
+script = ExtResource("1_73x2u")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="enemy3"]
+position = Vector2(-8.11998, 9.28398)
+scale = Vector2(0.96663, 1.04427)
+shape = SubResource("RectangleShape2D_uxatu")
+
+[node name="Area2D" type="Area2D" parent="enemy3"]
+position = Vector2(-4.02988, 21.5452)
+
+[node name="Sprite2D" type="Sprite2D" parent="enemy3/Area2D"]
+position = Vector2(0, -17.2361)
+scale = Vector2(0.193568, 0.213161)
+texture = ExtResource("2_2iwxp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="enemy3/Area2D"]
+position = Vector2(-2.06009, -16.9032)
+scale = Vector2(0.355221, 0.482915)
+shape = SubResource("RectangleShape2D_t4wjf")
+
+[node name="attackArea" type="Area2D" parent="enemy3/Area2D"]
+unique_name_in_owner = true
+scale = Vector2(10.9931, 1.1561)
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="enemy3/Area2D/attackArea"]
+position = Vector2(-0.556723, -16.6285)
+scale = Vector2(0.0626982, 1.46645)
+shape = SubResource("RectangleShape2D_4wcrf")
+
+[node name="HealthBar" parent="enemy3" instance=ExtResource("3_uxatu")]
+offset_left = -56.8399
+offset_top = 60.3455
+offset_right = 49.1601
+offset_bottom = 90.3455

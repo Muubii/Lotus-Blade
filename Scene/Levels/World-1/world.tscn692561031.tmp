@@ -246,7 +246,7 @@ size = Vector2(92.4033, 88.9037)
 size = Vector2(262.878, 211.472)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pu3cc"]
-size = Vector2(159.043, 70.5682)
+size = Vector2(135.481, 62.9748)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dlwip"]
 size = Vector2(8, 123)
@@ -869,7 +869,7 @@ scale = Vector2(10.9931, 1.1561)
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="enemy/Area2D/attackArea"]
-position = Vector2(-0.187395, -14.6559)
+position = Vector2(-0.556723, -16.6285)
 scale = Vector2(0.0626982, 1.46645)
 shape = SubResource("RectangleShape2D_pu3cc")
 

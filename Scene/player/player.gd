@@ -1,9 +1,11 @@
 extends CharacterBody2D
 
-@export var speed = 400
+@export var speed = 200
 @onready var animated_sprite = $AnimatedSprite2D
+@onready var interaction_area = $InteractionArea
+
 @export var attacking = false
-@export var attack_damage = 5
+@export var attack_damage = 20
 @export var health = 100
 @export var health_max = 100
 @export var health_min = 0
@@ -14,6 +16,13 @@ func _ready():
 func _process(_delta):
 	if Input.is_action_just_pressed("attack") and !attacking:
 		attack()
+
+func _input(event):
+	if event.is_action_pressed("ui_interact"):
+		interact()
+	elif event.is_action_pressed("advance_dialog"):
+		# If player should handle dialog advance locally, put logic here
+		pass
 
 func get_input():
 	var input_direction = Input.get_vector("left", "right", "up", "down")
@@ -40,6 +49,13 @@ func attack():
 			enemy.take_damage(attack_damage)
 	attacking = true
 	animated_sprite.play("atack1.down")
+
+func interact():
+	var overlapping_bodies = interaction_area.get_overlapping_bodies()
+	for body in overlapping_bodies:
+		if body.has_method("start_dialog"):
+			body.start_dialog(global_position)
+			break
 
 func take_damage(amount: int = 1):
 	health -= amount

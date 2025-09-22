@@ -1,6 +1,6 @@
-[gd_scene load_steps=87 format=3 uid="uid://d3asq3k1sr1nk"]
+[gd_scene load_steps=88 format=3 uid="uid://8744ipf7qi4x"]
 
-[ext_resource type="Script" uid="uid://bjtmytfrmdtnk" path="res://Scene/player/player.gd" id="1_c68nv"]
+[ext_resource type="Script" uid="uid://dsp6hfhqe57um" path="res://Scene/player/player.gd" id="1_c68nv"]
 [ext_resource type="Texture2D" uid="uid://chsnq6lonlxlr" path="res://assets/MC/Sprites/ATTACK 1/attack1_down.png" id="2_c31lq"]
 [ext_resource type="Texture2D" uid="uid://dlppcm1xj3bms" path="res://assets/MC/Sprites/IDLE/idle_down.png" id="3_2dof7"]
 [ext_resource type="Texture2D" uid="uid://dgkkasdcvme08" path="res://assets/MC/Sprites/IDLE/idle_left.png" id="4_4ao7i"]
@@ -567,38 +567,47 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_2sr8w"]
 radius = 3.00713
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yyifu"]
+size = Vector2(8.44665, 38.6665)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1vqkc"]
 size = Vector2(19.5086, 19.17)
 
-[node name="Player" type="Node2D"]
-
-[node name="player" type="CharacterBody2D" parent="."]
-position = Vector2(-73, 3)
+[node name="player" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_c68nv")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="player"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_7d6xm")
 animation = &"atack1.down"
 
-[node name="Camera2D" type="Camera2D" parent="player"]
+[node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(-2, 11)
 offset = Vector2(10, 10)
 zoom = Vector2(2.5, 2.5)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="player"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2(0.445313, 0.5)
 shape = SubResource("CircleShape2D_2sr8w")
 
-[node name="attackArea" type="Area2D" parent="player"]
+[node name="InteractionArea" type="Area2D" parent="."]
+scale = Vector2(120.848, 1.33657)
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
+position = Vector2(0, -0.748185)
+scale = Vector2(0.0626982, 1.46645)
+shape = SubResource("RectangleShape2D_yyifu")
+
+[node name="attackArea" type="Area2D" parent="."]
 scale = Vector2(10.9931, 1.1561)
 monitorable = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="player/attackArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="attackArea"]
 position = Vector2(1.54642, 5.18987)
 scale = Vector2(0.0626982, 1.46645)
 shape = SubResource("RectangleShape2D_1vqkc")
 
-[node name="HealthBar" parent="player" instance=ExtResource("11_yyifu")]
+[node name="HealthBar" parent="." instance=ExtResource("11_yyifu")]
 offset_left = -13.0
 offset_top = 19.0
 offset_right = 14.0

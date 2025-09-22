@@ -1,0 +1,49 @@
+[gd_scene load_steps=6 format=3 uid="uid://b6xb5xupbj15v"]
+
+[ext_resource type="Script" uid="uid://brm65y7jslkwm" path="res://Scene/npc/NPC.gd" id="1_d3bbh"]
+[ext_resource type="Texture2D" uid="uid://cbmu41ih4t3ef" path="res://assets/miku.jpeg" id="2_d3bbh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d4hh5"]
+size = Vector2(109, 116)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o32qj"]
+size = Vector2(439, 426)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d3bbh"]
+size = Vector2(19.5086, 19.17)
+
+[node name="Npc" type="CharacterBody2D"]
+script = ExtResource("1_d3bbh")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -73.0
+offset_top = -84.0
+offset_right = 67.0
+offset_bottom = -61.0
+text = "Press E to interact"
+metadata/_edit_use_anchors_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-2, 3.99999)
+scale = Vector2(0.277512, 0.288647)
+texture = ExtResource("2_d3bbh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-2, 4)
+shape = SubResource("RectangleShape2D_d4hh5")
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(-5, 5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(2, 0)
+shape = SubResource("RectangleShape2D_o32qj")
+
+[node name="attackArea" type="Area2D" parent="."]
+scale = Vector2(10.9931, 1.1561)
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="attackArea"]
+position = Vector2(1.54642, 5.18987)
+scale = Vector2(0.0626982, 1.46645)
+shape = SubResource("RectangleShape2D_d3bbh")

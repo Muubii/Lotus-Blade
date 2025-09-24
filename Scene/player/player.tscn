@@ -571,7 +571,7 @@ radius = 3.00713
 size = Vector2(8.44665, 38.6665)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1vqkc"]
-size = Vector2(19.5086, 19.17)
+size = Vector2(69.2394, 35.3907)
 
 [node name="player" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_c68nv")
@@ -603,7 +603,7 @@ scale = Vector2(10.9931, 1.1561)
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="attackArea"]
-position = Vector2(1.54642, 5.18987)
+position = Vector2(-0.0125954, -1.64981e-06)
 scale = Vector2(0.0626982, 1.46645)
 shape = SubResource("RectangleShape2D_1vqkc")
 

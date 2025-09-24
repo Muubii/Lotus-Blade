@@ -2,6 +2,9 @@ extends CharacterBody2D
 
 @onready var target = $"../player"
 @onready var attack_area = $Area2D/attackArea  # Adjust as needed for your structure
+@onready var visible_notifier = $VisibleOnScreenNotifier2D
+
+
 
 var speed: float = 50
 var health: int = 80
@@ -12,19 +15,22 @@ var attack_cooldown: float = 0.8  # SECONDS BETWEEN ATTACKS (lower for faster)
 var time_since_last_attack: float = 0.0
 
 func _physics_process(delta):
-	time_since_last_attack += delta
+	# Only chase and attack if enemy is visible on camera
+	if visible_notifier.is_on_screen():
+		time_since_last_attack += delta
+		var direction = (target.position - position).normalized()
+		velocity = direction * speed
+		look_at(target.position)
+		move_and_slide()
 
-	var direction = (target.position - position).normalized()
-	velocity = direction * speed
-	look_at(target.position)
-	move_and_slide()
+		if attack_area and attack_area.overlaps_body(target):
+			if time_since_last_attack >= attack_cooldown:
+				attack_player()
+	else:
+		# Optionally slow down, idle, or play an off-screen animation
+		velocity = Vector2.ZERO
+		move_and_slide()
 
-	if attack_area and attack_area.overlaps_body(target):
-		if time_since_last_attack >= attack_cooldown:
-			attack_player()
-	# Optional: Uncomment below to reset cooldown on exit
-	# else:
-	#	time_since_last_attack = attack_cooldown
 
 func attack_player():
 	if target.has_method("take_damage"):
